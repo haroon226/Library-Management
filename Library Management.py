@@ -437,7 +437,7 @@ def open_issue_book_window():
     tk.Label(
         win,
         text="Note: The deadline for returning a book is 1 week from the issue date.",
-        font=("Arial",9),
+        font=("Aptos Display",9),
         fg="#D32F2F",
         wraplength=360
     ).grid(
@@ -651,6 +651,7 @@ def open_search_member_window():
         padx=10,
         pady=10
     )
+    
 
 
 def on_close():
@@ -668,14 +669,14 @@ def on_close():
 root=tk.Tk()
 root.title("Library Management System")
 root.geometry("900x600")
-root.configure(bg="#E3F2FD")
+root.configure(bg="#D7FFDF")
 
 title=tk.Label(
     root,
     text="📚 Library Management System 📚",
     font=("Georgia",28,"bold"),
-    bg="#E8F5E9",
-    fg="#2E7D32"
+    bg="#F1FFE7",
+    fg="#4F5D75"
 )
 title.pack(pady=20)
 
@@ -687,28 +688,35 @@ menu_frame=tk.Frame(
 )
 menu_frame.pack(pady=20)
 
-buttons=[
-    ("📘 Add Book",open_add_book_window,"#4CAF50"),
-    ("👤 Add Member",open_add_member_window,"#2196F3"),
-    ("📖 Issue Book",open_issue_book_window,"#FF9800"),
-    ("📚 Available Books",display_books_window,"#9C27B0"),
-    ("↩ Return Book",open_return_book_window,"#009688"),
-    ("🔍 Search Member",open_search_member_window,"#607D8B")
+buttons = [
+    ("📘  Add Book", open_add_book_window, "#4CAF50"),
+    ("👤  Add Member", open_add_member_window, "#2196F3"),
+    ("📖  Issue Book", open_issue_book_window, "#FF9800"),
+    ("📚  Available Books", display_books_window, "#9C27B0"),
+    ("↩️  Return Book", open_return_book_window, "#009688"),
+    ("🔍  Search Member", open_search_member_window, "#607D8B")
 ]
 
 for index,(text,command,color) in enumerate(buttons):
     row=index//2
     col=index%2
 
-    tk.Button(
+    btn = tk.Button(
         menu_frame,
         text=text,
         command=command,
         width=24,
         height=2,
         bg=color,
-        font=("Arial",15)
-    ).grid(
+        font=("Aptos Display", 15),
+        cursor="hand2",
+        relief="raised"
+    )
+
+    btn.bind("<Enter>", lambda e, b=btn: b.config(relief="ridge"))
+    btn.bind("<Leave>", lambda e, b=btn: b.config(relief="raised"))
+
+    btn.grid(
         row=row,
         column=col,
         padx=8,
@@ -721,9 +729,11 @@ exit_btn=tk.Button(
     command=on_close,
     width=48,
     height=2,
-    bg="#ff9800",
-    fg="white",
-    font=("Arial",15,"bold")
+    bg="#FF101F",
+    fg="#F5F4ED",
+    font=("Agency FB",20,"bold"),
+    relief="raised",
+    cursor="hand2"
 )
 exit_btn.pack(pady=15)
 
